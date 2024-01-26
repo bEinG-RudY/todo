@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import 'screens/home.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/Screen/Task_Screen.dart';
+import 'package:todo/viewmodel/task_viewmodel.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'ToDo',
-      home: Home(),
+    return ChangeNotifierProvider(
+      create: (context) => TaskViewmodel(),
+      child: const MaterialApp(
+          debugShowCheckedModeBanner: false, home: TaskScreen()),
     );
   }
 }
